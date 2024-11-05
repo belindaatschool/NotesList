@@ -59,8 +59,6 @@ public class FBAuthHelper {
                 });
     }
     public void login(String email, String password){
-        if(email.isEmpty() || password.isEmpty()) return;
-
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
