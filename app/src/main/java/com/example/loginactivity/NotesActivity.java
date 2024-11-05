@@ -31,7 +31,8 @@ public class NotesActivity extends BaseActivity implements FireStoreHelper.FBRep
 
     }
     private void setupRecyclerView() {
-        Query query = fireStoreHelper.getCollectionRef().orderBy("timestamp", Query.Direction.DESCENDING);
+        Query query = fireStoreHelper.getCollectionRef();
+        //Query query = fireStoreHelper.getCollectionRef().orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Note> options = new FirestoreRecyclerOptions.Builder<Note>()
                 .setQuery(query, Note.class)
                 .build();
@@ -48,7 +49,9 @@ public class NotesActivity extends BaseActivity implements FireStoreHelper.FBRep
     @Override
     protected void onStart() {
         super.onStart();
+        //adapter.notifyDataSetChanged();
         adapter.startListening();
+
     }
 
     @Override
