@@ -4,20 +4,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Note {
-    public String title;
-    public String content;
-    public String timestamp;
+    String title;
+    String content;
+    String timestamp;
 
 
     public Note(String title, String content) {
         this.title = title;
         this.content = content;
-        this.timestamp = new SimpleDateFormat("dd-MM-yyyy  HH:mm").format(new Date());
+        this.timestamp = new SimpleDateFormat("dd/MM/yy  HH:mm").format(new Date());
     }
     public Note(){
         this.title = "";
         this.content = "";
-        this.timestamp = new SimpleDateFormat("dd-MM-yyyy  HH:mm").format(new Date());
+        this.timestamp = new SimpleDateFormat("dd/MM/yy  HH:mm").format(new Date());
     }
 
 

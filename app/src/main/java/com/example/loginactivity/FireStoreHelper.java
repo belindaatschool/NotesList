@@ -35,7 +35,7 @@ public class FireStoreHelper {
     }
 
     public void update(String id, Note note) {
-        collectionRef.document(id).set(note).addOnSuccessListener(aVoid -> {
+        collectionRef.document(id).update("title", note.getTitle(), "content", note.getContent()).addOnSuccessListener(aVoid -> {
             Log.d(TAG, "DocumentSnapshot updated with ID: " + id);
         }).addOnFailureListener(e -> {
             Log.w(TAG, "Error updating document", e);
