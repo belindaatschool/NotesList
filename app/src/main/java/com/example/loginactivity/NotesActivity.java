@@ -49,7 +49,7 @@ public class NotesActivity extends BaseActivity implements FireStoreHelper.FBRep
     @Override
     protected void onStart() {
         super.onStart();
-        //adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
         adapter.startListening();
 
     }

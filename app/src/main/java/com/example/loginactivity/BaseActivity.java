@@ -36,7 +36,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         if(item.getItemId() == R.id.action_logout) {
             fbAuthHelper.logout();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         } else if (item.getItemId() == R.id.action_home) {
             if(!(this instanceof NotesActivity))
