@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "693817274584",
+    "project_id": "fbauthex1",
+    "storage_bucket": "fbauthex1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693817274584:android:88755859ebec3eef2527ad",
+        "android_client_info": {
+          "package_name": "com.example.fbauthex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATGqsRko2ldbZG9ojaUHivfytRGeJnuJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693817274584:android:fd2ea2d2bf1f0a722527ad",
+        "android_client_info": {
+          "package_name": "com.example.loginactivity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATGqsRko2ldbZG9ojaUHivfytRGeJnuJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
