@@ -17,7 +17,7 @@ import java.util.concurrent.Executor;
 
 public class FBAuthHelper {
     private static final String TAG = "FBAuthHelper Tag";
-    private FirebaseAuth mAuth;
+    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();;
     private FBReply fbReply;
 
 
@@ -28,13 +28,11 @@ public class FBAuthHelper {
     }
 
     public FBAuthHelper(FBReply fbReply) {
-        // Initialize Firebase Auth
-        this.mAuth = FirebaseAuth.getInstance();
         this.fbReply = fbReply;
     }
 
-    public FirebaseUser getCurrentUser() {return mAuth.getCurrentUser();}
-    public boolean isLoggedIn() {return getCurrentUser() != null;}
+    public static FirebaseUser getCurrentUser() {return mAuth.getCurrentUser();}
+    public static boolean isLoggedIn() {return getCurrentUser() != null;}
 
     public void createUser(String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -72,7 +70,7 @@ public class FBAuthHelper {
                     }
                 });
     }
-    public void logout(){
+    public static void logout(){
         mAuth.signOut();
     }
 }

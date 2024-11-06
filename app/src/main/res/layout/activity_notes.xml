@@ -20,5 +20,6 @@
         android:layout_height="wrap_content"
         android:text="+"
         android:layout_gravity="center"
+        android:layout_marginVertical="20dp"
         android:textSize="20sp" />
 </LinearLayout>

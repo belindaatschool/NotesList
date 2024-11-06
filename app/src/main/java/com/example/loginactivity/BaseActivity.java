@@ -10,18 +10,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
-    FBAuthHelper fbAuthHelper;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fbAuthHelper = new FBAuthHelper(null);
-        if(fbAuthHelper.isLoggedIn())
-            getSupportActionBar().setTitle("Hi " + fbAuthHelper.getCurrentUser().getEmail());
+        if(FBAuthHelper.isLoggedIn())
+            getSupportActionBar().setTitle("Hi " + extractUsernameFromEmail(FBAuthHelper.getCurrentUser().getEmail()) );
         else
             getSupportActionBar().setTitle("Login");
-        getSupportActionBar().setIcon(R.drawable.ic_menu_foreground);
+
+        //show icon on toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.ic_app_icon);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if(item.getItemId() == R.id.action_logout) {
-            fbAuthHelper.logout();
+            FBAuthHelper.logout();
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         } else if (item.getItemId() == R.id.action_home) {
@@ -50,7 +50,7 @@ public class BaseActivity extends AppCompatActivity {
         MenuItem loginItem = menu.findItem(R.id.action_login);
         MenuItem logoutItem = menu.findItem(R.id.action_logout);
 
-        if (fbAuthHelper.isLoggedIn()) {
+        if (FBAuthHelper.isLoggedIn()) {
             // User is logged in, show logout item
             loginItem.setVisible(false);
             logoutItem.setVisible(true);
@@ -59,11 +59,18 @@ public class BaseActivity extends AppCompatActivity {
             loginItem.setVisible(true);
             logoutItem.setVisible(false);
         }
-
         return super.onPrepareOptionsMenu(menu);
     }
 
     private void updateMenuVisibility() {
         invalidateOptionsMenu(); // Force the menu to be recreated
+    }
+
+    private static String extractUsernameFromEmail(String email) {
+        // Extract the username from the email
+        String username = email.split("@")[0];
+        //capitalize first letter of string
+        username = username.substring(0, 1).toUpperCase() + username.substring(1);
+        return username;
     }
 }

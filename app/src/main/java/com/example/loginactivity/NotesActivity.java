@@ -11,8 +11,7 @@ import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 
-public class NotesActivity extends BaseActivity implements FireStoreHelper.FBReply {
-    FireStoreHelper fireStoreHelper;
+public class NotesActivity extends BaseActivity {
     RecyclerView rvNotes;
     NotesAdapter adapter;
 
@@ -26,13 +25,10 @@ public class NotesActivity extends BaseActivity implements FireStoreHelper.FBRep
             startActivity(new Intent(this,EditNoteActivity.class));
         });
 
-        fireStoreHelper = new FireStoreHelper(this);
         setupRecyclerView();
-
     }
     private void setupRecyclerView() {
-        Query query = fireStoreHelper.getCollectionRef();
-        //Query query = fireStoreHelper.getCollectionRef().orderBy("timestamp", Query.Direction.DESCENDING);
+        Query query = FireStoreHelper.getCollectionRef().orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Note> options = new FirestoreRecyclerOptions.Builder<Note>()
                 .setQuery(query, Note.class)
                 .build();
@@ -42,14 +38,8 @@ public class NotesActivity extends BaseActivity implements FireStoreHelper.FBRep
     }
 
     @Override
-    public void getAllSuccess(ArrayList<Note> notes)  {}
-    @Override
-    public void getOneSuccess(Note note) {}
-
-    @Override
     protected void onStart() {
         super.onStart();
-        adapter.notifyDataSetChanged();
         adapter.startListening();
 
     }
@@ -58,5 +48,11 @@ public class NotesActivity extends BaseActivity implements FireStoreHelper.FBRep
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 }

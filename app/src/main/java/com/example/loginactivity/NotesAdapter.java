@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -53,7 +51,6 @@ public class NotesAdapter extends FirestoreRecyclerAdapter<Note, NotesAdapter.No
             tvItemTitle = itemView.findViewById(R.id.tvItemTitle);
             tvItemContent = itemView.findViewById(R.id.tvItemContent);
             tvItemTimestamp = itemView.findViewById(R.id.tvItemTimestamp);
-
         }
     }
 }

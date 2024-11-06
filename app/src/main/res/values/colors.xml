@@ -2,5 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background_color">#EEEEEE</color> <!-- Light gray -->
+    <color name="background_color">#EEEEEE</color>
+    <color name="light_lilac">#F2ECF6</color>
+    <color name="dark_purple">#673AB7</color> <!-- Light gray -->
 </resources>

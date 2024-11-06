@@ -1,6 +1,7 @@
 package com.example.loginactivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,27 +42,31 @@ public class EditNoteActivity extends BaseActivity {
             etNoteTitle.setText(getIntent().getStringExtra("title"));
             etNoteContent.setText(getIntent().getStringExtra("content"));
             tvNoteTimestamp.setText(getIntent().getStringExtra("timestamp"));
-        }
-
-        findViewById(R.id.btnSave).setOnClickListener(v -> {
-            // Validate input
-            if(validateInput()) {
+        } else
+            findViewById(R.id.ivDelete).setVisibility(View.GONE);
+        //save
+        findViewById(R.id.ivSave).setOnClickListener(v -> {
+            if(isValidInput()) {
                 saveNote(etNoteTitle.getText().toString(), etNoteContent.getText().toString());
                 finish();
             }
         });
-
+        //delete
+        findViewById(R.id.ivDelete).setOnClickListener(v -> {
+            fireStoreHelper.delete(docId);
+            finish();
+        });
+        //back
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
     }
-    private boolean validateInput() {
+    private boolean isValidInput() {
         boolean isValid = true;
         if (etNoteTitle.getText().toString().isEmpty()) {
             etNoteTitle.setError("Please enter a title");
-            //Toast.makeText(this, "Please enter a title", Toast.LENGTH_SHORT).show();
             isValid = false;
         }
         if (etNoteContent.getText().toString().isEmpty()) {
             etNoteContent.setError("Please enter some content");
-            //Toast.makeText(this, "Please enter some content", Toast.LENGTH_SHORT).show();
             isValid = false;
         }
         return isValid;

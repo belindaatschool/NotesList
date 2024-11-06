@@ -9,8 +9,9 @@ import java.util.ArrayList;
 
 public class FireStoreHelper {
     private static final String TAG = "FireStoreHelper Tag";
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference collectionRef;
+    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private static CollectionReference collectionRef = db.collection("notes").document(currentUser.getUid()).collection("my_notes");;
     private FireStoreHelper.FBReply fbReply;
 
     public interface FBReply {
@@ -20,8 +21,6 @@ public class FireStoreHelper {
 
     public FireStoreHelper(FireStoreHelper.FBReply fbReply) {
         this.fbReply = fbReply;
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        collectionRef = db.collection("notes").document(currentUser.getUid()).collection("my_notes");
     }
 
     public void add(Note note) {
@@ -79,7 +78,7 @@ public class FireStoreHelper {
         });
     }
 
-    public CollectionReference getCollectionRef() {
+    public static CollectionReference getCollectionRef() {
         return collectionRef;
     }
 }
