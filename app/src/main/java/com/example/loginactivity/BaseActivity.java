@@ -16,7 +16,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fbAuthHelper = new FBAuthHelper(this, null);
+        fbAuthHelper = new FBAuthHelper(null);
         if(fbAuthHelper.isLoggedIn())
             getSupportActionBar().setTitle("Hi " + fbAuthHelper.getCurrentUser().getEmail());
         else
@@ -36,7 +36,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         if(item.getItemId() == R.id.action_logout) {
             fbAuthHelper.logout();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         } else if (item.getItemId() == R.id.action_home) {
             if(!(this instanceof NotesActivity))

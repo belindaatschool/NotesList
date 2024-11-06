@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
-public class EditNoteActivity extends BaseActivity implements FireStoreHelper.FBReply {
+public class EditNoteActivity extends BaseActivity {
     FireStoreHelper fireStoreHelper;
     EditText etNoteTitle;
     EditText etNoteContent;
@@ -26,7 +26,7 @@ public class EditNoteActivity extends BaseActivity implements FireStoreHelper.FB
         setContentView(R.layout.activity_edit_note);
 
         // Initialize FireStoreHelper
-        fireStoreHelper = new FireStoreHelper(this);
+        fireStoreHelper = new FireStoreHelper(null);
 
         // Set up UI components
         etNoteTitle = findViewById(R.id.etNoteTitle);
@@ -44,40 +44,32 @@ public class EditNoteActivity extends BaseActivity implements FireStoreHelper.FB
         }
 
         findViewById(R.id.btnSave).setOnClickListener(v -> {
-            etNoteTitle.setError(null);
             // Validate input
-            validateInput();
-            saveNote(etNoteTitle.getText().toString(), etNoteContent.getText().toString());
+            if(validateInput()) {
+                saveNote(etNoteTitle.getText().toString(), etNoteContent.getText().toString());
+                finish();
+            }
         });
 
     }
-    private void validateInput() {
+    private boolean validateInput() {
+        boolean isValid = true;
         if (etNoteTitle.getText().toString().isEmpty()) {
             etNoteTitle.setError("Please enter a title");
             //Toast.makeText(this, "Please enter a title", Toast.LENGTH_SHORT).show();
-            return;
+            isValid = false;
         }
         if (etNoteContent.getText().toString().isEmpty()) {
             etNoteContent.setError("Please enter some content");
             //Toast.makeText(this, "Please enter some content", Toast.LENGTH_SHORT).show();
-            return;
+            isValid = false;
         }
+        return isValid;
     }
     private void saveNote(String title, String content) {
         if (isEditMode)
             fireStoreHelper.update(docId, new Note(title, content));
         else
             fireStoreHelper.add(new Note(title, content));
-
-        finish();
-    }
-
-    @Override
-    public void getAllSuccess(ArrayList<Note> notes) {
-    }
-
-    @Override
-    public void getOneSuccess(Note note) {
-        Toast.makeText(this, "Note saved successfully", Toast.LENGTH_SHORT).show();
     }
 }

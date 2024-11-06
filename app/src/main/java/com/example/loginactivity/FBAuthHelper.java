@@ -17,7 +17,6 @@ import java.util.concurrent.Executor;
 
 public class FBAuthHelper {
     private static final String TAG = "FBAuthHelper Tag";
-    private Activity activity;
     private FirebaseAuth mAuth;
     private FBReply fbReply;
 
@@ -28,10 +27,9 @@ public class FBAuthHelper {
         public void loginSuccess(FirebaseUser user);
     }
 
-    public FBAuthHelper(Activity activity, FBReply fbReply) {
+    public FBAuthHelper(FBReply fbReply) {
         // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-        this.activity = activity;
+        this.mAuth = FirebaseAuth.getInstance();
         this.fbReply = fbReply;
     }
 
@@ -40,41 +38,36 @@ public class FBAuthHelper {
 
     public void createUser(String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(activity, (OnCompleteListener<AuthResult>) new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener((OnCompleteListener<AuthResult>) new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                            fbReply.createUserSuccess(user);
+                            if(fbReply != null)
+                                fbReply.createUserSuccess(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
     public void login(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            fbReply.loginSuccess(user);
-                            //updateUI(user);
+                            if(fbReply != null)
+                                fbReply.loginSuccess(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
                     }
                 });
@@ -82,5 +75,4 @@ public class FBAuthHelper {
     public void logout(){
         mAuth.signOut();
     }
-
 }

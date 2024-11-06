@@ -9,58 +9,66 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements FBAuthHelper.FBReply {
-
+public class LoginActivity extends AppCompatActivity implements FBAuthHelper.FBReply {
+    private FBAuthHelper fbAuthHelper;
     private EditText etEmail;
     private EditText etPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         etEmail = findViewById(R.id.etEmail);
         etPwd = findViewById(R.id.etPwd);
 
-        FBAuthHelper fbAuthHelper = new FBAuthHelper(this,this);
+        fbAuthHelper = new FBAuthHelper(this);
+
+        //skip login if user is already logged in
         if(fbAuthHelper.getCurrentUser() != null)
             startActivity(new Intent(this, NotesActivity.class));
 
+        //login
         findViewById(R.id.btnLogin).setOnClickListener(v -> {
-            checkEmailValidity(etEmail.getText().toString());
-            checkPasswordValidity(etPwd.getText().toString());
+            if(     checkEmailValidity(etEmail.getText().toString()) &&
+                    checkPasswordValidity(etPwd.getText().toString()) )
 
-            fbAuthHelper.login(
+                fbAuthHelper.login(
                     etEmail.getText().toString(),
                     etPwd.getText().toString());
 
         });
 
+        //register
         findViewById(R.id.btnRegister).setOnClickListener(v -> {
-            checkEmailValidity(etEmail.getText().toString());
-            checkPasswordValidity(etPwd.getText().toString());
+            if( checkEmailValidity(etEmail.getText().toString()) &&
+                checkPasswordValidity(etPwd.getText().toString()) )
 
-            fbAuthHelper.createUser(
+                fbAuthHelper.createUser(
                     etEmail.getText().toString(),
                     etPwd.getText().toString());
         });
     }
 
-    private void checkPasswordValidity(String password) {
+    private boolean checkPasswordValidity(String password) {
         if (password.length() >= 6) {
             // Password is valid
+            return true;
         } else {
             // Password is invalid, show an error message
             etPwd.setError("Password must be at least 6 characters long");
+            return false;
         }
     }
 
-    private void checkEmailValidity(String email) {
+    private boolean checkEmailValidity(String email) {
         if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             // Email is valid
+            return true;
         } else {
             // Email is invalid, show an error message
             etEmail.setError("Invalid email address");
+            return false;
         }
     }
 
