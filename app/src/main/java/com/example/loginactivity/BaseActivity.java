@@ -16,7 +16,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fbAuthHelper = new FBAuthHelper(this, null);
+        fbAuthHelper = new FBAuthHelper(null);
         if(fbAuthHelper.isLoggedIn())
             getSupportActionBar().setTitle("Hi " + fbAuthHelper.getCurrentUser().getEmail());
         else

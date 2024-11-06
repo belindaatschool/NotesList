@@ -1,12 +1,10 @@
 package com.example.loginactivity;
 
 import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
 
 public class FireStoreHelper {
@@ -79,7 +77,6 @@ public class FireStoreHelper {
                 Log.d(TAG, "get failed with ", task.getException());
             }
         });
-
     }
 
     public CollectionReference getCollectionRef() {

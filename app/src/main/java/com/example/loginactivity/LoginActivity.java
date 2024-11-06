@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements FBAuthHelper.FBReply {
-
+    private FBAuthHelper fbAuthHelper;
     private EditText etEmail;
     private EditText etPwd;
 
@@ -22,10 +22,13 @@ public class LoginActivity extends AppCompatActivity implements FBAuthHelper.FBR
         etEmail = findViewById(R.id.etEmail);
         etPwd = findViewById(R.id.etPwd);
 
-        FBAuthHelper fbAuthHelper = new FBAuthHelper(this,this);
+        fbAuthHelper = new FBAuthHelper(this);
+
+        //skip login if user is already logged in
         if(fbAuthHelper.getCurrentUser() != null)
             startActivity(new Intent(this, NotesActivity.class));
 
+        //login
         findViewById(R.id.btnLogin).setOnClickListener(v -> {
             if(     checkEmailValidity(etEmail.getText().toString()) &&
                     checkPasswordValidity(etPwd.getText().toString()) )
@@ -36,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements FBAuthHelper.FBR
 
         });
 
+        //register
         findViewById(R.id.btnRegister).setOnClickListener(v -> {
             if( checkEmailValidity(etEmail.getText().toString()) &&
                 checkPasswordValidity(etPwd.getText().toString()) )
