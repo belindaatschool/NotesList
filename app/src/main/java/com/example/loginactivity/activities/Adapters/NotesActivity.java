@@ -1,4 +1,4 @@
-package com.example.loginactivity;
+package com.example.loginactivity.activities.Adapters;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,10 +6,13 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.loginactivity.activities.BaseActivity;
+import com.example.loginactivity.utils.FireStoreHelper;
+import com.example.loginactivity.model.Note;
+import com.example.loginactivity.activities.NotesAdapter;
+import com.example.loginactivity.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
-
-import java.util.ArrayList;
 
 public class NotesActivity extends BaseActivity {
     RecyclerView rvNotes;
@@ -22,7 +25,7 @@ public class NotesActivity extends BaseActivity {
 
         rvNotes = findViewById(R.id.rvNotes);
         findViewById(R.id.btnAddNote).setOnClickListener(v -> {
-            startActivity(new Intent(this,EditNoteActivity.class));
+            startActivity(new Intent(this, EditNoteActivity.class));
         });
 
         setupRecyclerView();

@@ -1,4 +1,4 @@
-package com.example.loginactivity;
+package com.example.loginactivity.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.loginactivity.activities.Adapters.NotesActivity;
+import com.example.loginactivity.R;
+import com.example.loginactivity.utils.FBAuthHelper;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements FBAuthHelper.FBReply {
@@ -72,6 +75,8 @@ public class LoginActivity extends AppCompatActivity implements FBAuthHelper.FBR
         }
     }
 
+
+
     @Override
     public void createUserSuccess(FirebaseUser user) {
         Toast.makeText(this, "Welcome " + user.getEmail(), Toast.LENGTH_SHORT).show();
@@ -81,5 +86,4 @@ public class LoginActivity extends AppCompatActivity implements FBAuthHelper.FBR
     public void loginSuccess(FirebaseUser user) {
         startActivity(new Intent(this, NotesActivity.class));
     }
-
 }

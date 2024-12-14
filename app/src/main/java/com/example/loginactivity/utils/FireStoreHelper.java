@@ -1,6 +1,8 @@
-package com.example.loginactivity;
+package com.example.loginactivity.utils;
 
 import android.util.Log;
+
+import com.example.loginactivity.model.Note;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,7 +34,10 @@ public class FireStoreHelper {
     }
 
     public void update(String id, Note note) {
-        collectionRef.document(id).update("title", note.getTitle(), "content", note.getContent()).addOnSuccessListener(aVoid -> {
+        collectionRef.document(id).update(
+                "title", note.getTitle(),
+                "content", note.getContent(),
+                "image", note.getImage()).addOnSuccessListener(aVoid -> {
             Log.d(TAG, "DocumentSnapshot updated with ID: " + id);
         }).addOnFailureListener(e -> {
             Log.w(TAG, "Error updating document", e);

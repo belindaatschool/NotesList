@@ -1,9 +1,6 @@
-package com.example.loginactivity;
+package com.example.loginactivity.utils;
 
-import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -13,11 +10,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.concurrent.Executor;
-
 public class FBAuthHelper {
     private static final String TAG = "FBAuthHelper Tag";
-    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FBReply fbReply;
 
 

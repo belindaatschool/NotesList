@@ -1,4 +1,4 @@
-package com.example.loginactivity;
+package com.example.loginactivity.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.loginactivity.activities.Adapters.NotesActivity;
+import com.example.loginactivity.R;
+import com.example.loginactivity.utils.FBAuthHelper;
 
 public class BaseActivity extends AppCompatActivity {
     @Override
@@ -22,6 +26,8 @@ public class BaseActivity extends AppCompatActivity {
         //show icon on toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_app_icon);
+
+
     }
 
     @Override
