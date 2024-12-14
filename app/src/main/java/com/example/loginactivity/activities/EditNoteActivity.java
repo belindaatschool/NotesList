@@ -1,4 +1,4 @@
-package com.example.loginactivity.activities.Adapters;
+package com.example.loginactivity.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.loginactivity.activities.BaseActivity;
 import com.example.loginactivity.utils.FireStoreHelper;
 import com.example.loginactivity.utils.ImageUtils;
 import com.example.loginactivity.model.Note;

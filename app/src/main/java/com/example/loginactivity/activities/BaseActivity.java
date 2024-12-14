@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.loginactivity.activities.Adapters.NotesActivity;
 import com.example.loginactivity.R;
 import com.example.loginactivity.utils.FBAuthHelper;
 

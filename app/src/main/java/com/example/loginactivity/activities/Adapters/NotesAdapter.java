@@ -1,4 +1,4 @@
-package com.example.loginactivity.activities;
+package com.example.loginactivity.activities.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.loginactivity.activities.Adapters.EditNoteActivity;
+import com.example.loginactivity.activities.EditNoteActivity;
 import com.example.loginactivity.model.Note;
 import com.example.loginactivity.R;
 import com.example.loginactivity.utils.ImageUtils;

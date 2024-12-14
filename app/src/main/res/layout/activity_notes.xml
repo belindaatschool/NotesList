@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_color"
-    tools:context=".activities.Adapters.NotesActivity">
+    tools:context=".activities.NotesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@id/rvNotes"

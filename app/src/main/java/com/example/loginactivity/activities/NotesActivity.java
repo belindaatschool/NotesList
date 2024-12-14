@@ -1,4 +1,4 @@
-package com.example.loginactivity.activities.Adapters;
+package com.example.loginactivity.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,10 +6,9 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.loginactivity.activities.BaseActivity;
+import com.example.loginactivity.activities.Adapters.NotesAdapter;
 import com.example.loginactivity.utils.FireStoreHelper;
 import com.example.loginactivity.model.Note;
-import com.example.loginactivity.activities.NotesAdapter;
 import com.example.loginactivity.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
