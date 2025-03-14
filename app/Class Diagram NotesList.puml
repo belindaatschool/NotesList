@@ -1,0 +1,89 @@
+@startuml
+!theme cerulean
+skinparam classAttributeIconSize 0
+
+    class BaseActivity {
+        + onCreate(savedInstanceState: Bundle): void
+        + setContentView(layoutResID: int): void
+        + setScreenTitle(title: String): void
+        + showProgressDialog(): void
+        + dismissProgressDialog(): void
+    }
+
+    class MainActivity {
+        + onCreate(savedInstanceState: Bundle): void
+    }
+
+    class AddEditNoteActivity {
+        + onCreate(savedInstanceState: Bundle): void
+        + saveNote(): void
+    }
+
+
+
+    class Note {
+        + id: String
+        + title: String
+        + content: String
+        + timestamp: long
+    }
+
+    class NoteAdapter {
+        - notes: List<Note>
+        + onCreateViewHolder(parent: ViewGroup, viewType: int): NoteViewHolder
+        + onBindViewHolder(holder: NoteViewHolder, position: int): void
+        + getItemCount(): int
+    }
+
+    class NoteViewHolder {
+        - titleTextView: TextView
+        - contentTextView: TextView
+        - timestampTextView: TextView
+        + NoteViewHolder(itemView: View)
+    }
+
+    class NoteRepository {
+        - firestore: FirebaseFirestore
+        + getAllNotes(): LiveData<List<Note>>
+        + insertNote(note: Note): void
+        + updateNote(note: Note): void
+        + deleteNote(noteId: String): void
+    }
+
+
+package "utils" {
+    class FBAuthHelper {
+        - TAG: String
+        - mAuth: FirebaseAuth
+        - fbReply: FBReply
+        + FBAuthHelper(fbReply: FBReply)
+        + createUser(email: String, password: String): void
+        + login(email: String, password: String): void
+        + static getCurrentUser(): FirebaseUser
+        + static isLoggedIn(): boolean
+        + static logout(): void
+    }
+
+    interface FBReply {
+        + createUserSuccess(user: FirebaseUser): void
+        + loginSuccess(user: FirebaseUser): void
+    }
+}
+
+BaseActivity <|-- MainActivity
+BaseActivity <|-- AddEditNoteActivity
+
+MainActivity --> NoteAdapter : uses
+NoteAdapter --> NoteViewHolder : creates
+NoteAdapter --> Note : contains
+NoteViewHolder --> Note : binds
+AddEditNoteActivity --> NoteRepository : interacts with
+NoteRepository --> Note : manages
+
+MainActivity --> FBAuthHelper : uses
+FBAuthHelper --> FBReply : interacts with
+FBAuthHelper --> FirebaseAuth : manages
+FBAuthHelper --> FirebaseUser : manages
+@enduml
+'https://plantuml.com/class-diagram
+'https://github.com/belindaatschool/NotesList
